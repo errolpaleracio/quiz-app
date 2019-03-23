@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".QuestionActivity">
+
+    <android.support.design.widget.AppBarLayout
+        android:theme="@style/App.Theme.AppBarOverLay"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            app:popupTheme="@style/App.Theme.PopupOverlay"
+            android:background="?attr/colorPrimary">
+
+        </android.support.v7.widget.Toolbar>
+
+    </android.support.design.widget.AppBarLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="20dp">
+
+        <LinearLayout
+            android:id="@+id/infoPane"
+            android:background="@drawable/question_text_style"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="15dp"
+            android:orientation="horizontal">
+            <TextView
+                android:id="@+id/tv_question_count"
+                android:textSize="20sp"
+                android:text="1/4 Question"
+                android:layout_weight="1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:id="@+id/tv_points"
+                android:textSize="20sp"
+                android:text="0 points"
+                android:gravity="right"
+                android:layout_weight="1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+        <TextView
+            android:id="@+id/tv_question_text"
+            android:textSize="16sp"
+            android:text="Question Text"
+            android:background="@drawable/question_text_style"
+            android:layout_below="@+id/infoPane"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:padding="20dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <RadioGroup
+            android:id="@+id/rgQuestions"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_question_text">
+
+            <RadioButton
+                android:id="@+id/rbAnswerA"
+                android:text="A: "
+                android:textColor="#fff"
+                android:background="@drawable/custom_radio_button"
+                android:button="@android:color/transparent"
+                android:padding="10dp"
+                android:layout_marginBottom="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <RadioButton
+                android:id="@+id/rbAnswerB"
+                android:text="B: "
+                android:textColor="#fff"
+                android:background="@drawable/custom_radio_button"
+                android:button="@android:color/transparent"
+                android:padding="10dp"
+                android:layout_marginBottom="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <RadioButton
+                android:id="@+id/rbAnswerC"
+                android:text="C: "
+                android:textColor="#fff"
+                android:background="@drawable/custom_radio_button"
+                android:button="@android:color/transparent"
+                android:padding="10dp"
+                android:layout_marginBottom="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <RadioButton
+                android:id="@+id/rbAnswerD"
+                android:text="D: "
+                android:textColor="#fff"
+                android:background="@drawable/custom_radio_button"
+                android:button="@android:color/transparent"
+                android:padding="10dp"
+                android:layout_marginBottom="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+        </RadioGroup>
+        <Button
+            android:id="@+id/btn_next"
+            android:text="Next"
+            android:background="@drawable/button_next"
+            android:layout_below="@+id/rgQuestions"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="#fff"/>
+    </RelativeLayout>
+
+
+
+
+</LinearLayout>
