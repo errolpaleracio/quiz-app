@@ -76,5 +76,4 @@ public class DBHelper extends SQLiteAssetHelper{
         return questions;
     }
 
-
 }

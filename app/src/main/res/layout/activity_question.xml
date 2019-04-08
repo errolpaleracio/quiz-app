@@ -12,16 +12,16 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <android.support.v7.widget.Toolbar
-            android:id="@+id/toolbar"
-            android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            app:popupTheme="@style/App.Theme.PopupOverlay"
-            android:background="?attr/colorPrimary">
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        app:popupTheme="@style/App.Theme.PopupOverlay"
+        android:background="?attr/colorPrimary">
 
-        </android.support.v7.widget.Toolbar>
+    </android.support.v7.widget.Toolbar>
 
-    </android.support.design.widget.AppBarLayout>
+</android.support.design.widget.AppBarLayout>
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -34,7 +34,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="15dp"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:layout_marginBottom="10dp">
             <TextView
                 android:id="@+id/tv_question_count"
                 android:textSize="20sp"
@@ -52,12 +53,23 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
         </LinearLayout>
+        <LinearLayout
+            android:id="@+id/lifePane"
+            android:layout_below="@+id/infoPane"
+            android:background="@drawable/question_text_style"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="15dp"
+            android:orientation="horizontal">
+
+
+        </LinearLayout>
         <TextView
             android:id="@+id/tv_question_text"
             android:textSize="16sp"
             android:text="Question Text"
             android:background="@drawable/question_text_style"
-            android:layout_below="@+id/infoPane"
+            android:layout_below="@+id/lifePane"
             android:layout_marginTop="10dp"
             android:layout_marginBottom="10dp"
             android:padding="20dp"
@@ -115,14 +127,6 @@
                 android:layout_height="wrap_content" />
 
         </RadioGroup>
-        <Button
-            android:id="@+id/btn_next"
-            android:text="Next"
-            android:background="@drawable/button_next"
-            android:layout_below="@+id/rgQuestions"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textColor="#fff"/>
     </RelativeLayout>
 
 

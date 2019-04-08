@@ -2,6 +2,7 @@ package com.thesis.quiz.quizapp.Adapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.media.MediaPlayer;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
@@ -12,6 +13,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.thesis.quiz.quizapp.Common.Common;
+import com.thesis.quiz.quizapp.MainActivity;
 import com.thesis.quiz.quizapp.Model.Category;
 import com.thesis.quiz.quizapp.QuestionActivity;
 import com.thesis.quiz.quizapp.R;
@@ -65,6 +67,8 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
             cardView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    final MediaPlayer mp = MediaPlayer.create(context, R.raw.tap);
+                    mp.start();
                     Common.selectedCategory = categories.get(getAdapterPosition());
                     Intent intent = new Intent(context, QuestionActivity.class);
                     context.startActivity(intent);
