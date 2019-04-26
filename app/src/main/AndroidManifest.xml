@@ -9,7 +9,7 @@
         android:roundIcon="@mipmap/math_buddy_circle"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity">
+        <activity android:name=".SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -18,7 +18,10 @@
         </activity>
         <activity android:name=".QuestionActivity" />
         <activity android:name=".CategoryActivity" />
+        <activity android:name=".MainActivity" />
         <activity android:name=".ResultActivity" />
+        <activity android:name=".PlaceValueActivity" />
+        <activity android:name=".AboutUsActivity"></activity>
     </application>
 
 </manifest>

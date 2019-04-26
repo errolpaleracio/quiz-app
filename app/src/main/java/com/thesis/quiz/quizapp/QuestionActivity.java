@@ -1,13 +1,19 @@
 package com.thesis.quiz.quizapp;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.media.MediaPlayer;
 import android.os.Handler;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.text.SpannableString;
+import android.text.style.UnderlineSpan;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
@@ -33,15 +39,26 @@ public class QuestionActivity extends AppCompatActivity {
 //    private Button btnNext;
     private RadioGroup rgQuestions;
     private RadioButton rbAnswerA, rbAnswerB, rbAnswerC, rbAnswerD;
-    private TextView tvQuestionCount, tvQuestionText, tvPoints;
+    private TextView tvQuestionCount, tvQuestionText, tvPoints, tvDirection;
     private List<Question> questions;
     private LinearLayout linearLayout;
-
+    private MediaPlayer mp;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_question);
+        Toolbar toolbar = (Toolbar)findViewById(R.id.toolbar_question);
+        toolbar.setTitle("Quiz");
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
 
         questionIndex = points = counter = 0;
         questions = DBHelper.getInstance(this).getQuestionByCategory(Common.selectedCategory.getCategoryId());
@@ -57,7 +74,7 @@ public class QuestionActivity extends AppCompatActivity {
         rbAnswerA = (RadioButton)findViewById(R.id.rbAnswerA);
         rbAnswerB = (RadioButton)findViewById(R.id.rbAnswerB);
         rbAnswerC = (RadioButton)findViewById(R.id.rbAnswerC);
-        rbAnswerD = (RadioButton)findViewById(R.id.rbAnswerD);
+        //rbAnswerD = (RadioButton)findViewById(R.id.rbAnswerD);
         initQuestion();
 //        btnNext = (Button)findViewById(R.id.btn_next);
 //        btnNext.setOnClickListener(new View.OnClickListener() {
@@ -68,17 +85,30 @@ public class QuestionActivity extends AppCompatActivity {
 //        });
 
         rgQuestions.setOnCheckedChangeListener(new RGQuestionListener());
+
+        tvDirection = (TextView)findViewById(R.id.tv_directions);
+        tvDirection.setText("Directions: " + Common.selectedCategory.getDirection());
     }
 
     public void initQuestion(){
         if(questions.size() > 0 && questionIndex < questions.size()){
             Question question = questions.get(questionIndex);
+            SpannableString str = new SpannableString(question.getQuestionText());
+            int underlineIndex = question.getUnderlineIndex();
+
+            if(Common.selectedCategory.getCategoryId() == 1){
+                str.setSpan(new UnderlineSpan(), underlineIndex, underlineIndex + 1, 0);
+            }
+
             tvQuestionCount.setText(String.format("%d/%d question", questionIndex + 1, questions.size()));
-            tvQuestionText.setText(question.getQuestionText());
+            tvQuestionText.setText(str);
             rbAnswerA.setText(question.getAnswerA());
             rbAnswerB.setText(question.getAnswerB());
-            rbAnswerC.setText(question.getAnswerC());
-            rbAnswerD.setText(question.getAnswerD());
+            if(Common.selectedCategory.getCategoryId() != 2 && Common.selectedCategory.getCategoryId() != 6) {
+                rbAnswerC.setText(question.getAnswerC());
+                rbAnswerC.setVisibility(View.VISIBLE);
+            }else
+                rbAnswerC.setVisibility(View.GONE);
         }
     }
 
@@ -94,6 +124,7 @@ public class QuestionActivity extends AppCompatActivity {
             resetOptions();
             rgQuestions.setOnCheckedChangeListener(new RGQuestionListener());
             setClickable(true);
+            mp.release();
         }
         else{
             
@@ -129,6 +160,7 @@ public class QuestionActivity extends AppCompatActivity {
         }
     }
 
+
     public void showResult(){
 
         Intent intent = new Intent(QuestionActivity.this, ResultActivity.class);
@@ -160,7 +192,7 @@ public class QuestionActivity extends AppCompatActivity {
                     checkedRb.setBackgroundResource(R.drawable.wrong_state_radio_button);
                     ((RadioButton)checkedRb).setCompoundDrawables(null, null, clearImg, null);
                     if(Common.life > 0){
-                        final MediaPlayer mp = MediaPlayer.create(QuestionActivity.this, R.raw.wronganswer);
+                        mp = MediaPlayer.create(QuestionActivity.this, R.raw.wronganswer);
                         mp.start();
                         Common.wrongCount++;
                         Common.life--;
@@ -170,9 +202,9 @@ public class QuestionActivity extends AppCompatActivity {
 
                 }
                 if (checkedIndex == correctAnswerIndex) {
-                    final MediaPlayer mp = MediaPlayer.create(QuestionActivity.this, R.raw.correctanswer);
+                    mp = MediaPlayer.create(QuestionActivity.this, R.raw.yehey);
                     mp.start();
-                    Common.points += 10;
+                    Common.points += 1;
                     Common.correctCount++;
 
                     tvPoints.setText(String.valueOf(Common.points) + " points");
@@ -181,7 +213,7 @@ public class QuestionActivity extends AppCompatActivity {
                 new Handler().postDelayed(new Runnable() {
                     @Override
                     public void run() {
-                        if((Common.life == 0 || questionIndex == questions.size() - 1)){
+                        if((questionIndex == questions.size() - 1 || Common.life == 0)){
                             showResult();
                         }else{
                             goNext();
@@ -197,5 +229,39 @@ public class QuestionActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         return;
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+
+        if (id == R.id.action_close) {
+            if(id == R.id.action_close){
+                new AlertDialog.Builder(this)
+                        .setTitle("Exit Application")
+                        .setMessage("Are you sure you want to close the game?")
+                        .setPositiveButton("No", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+
+                            }
+                        })
+                        .setNegativeButton("Yes", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                finishAffinity();
+                            }
+                        })
+                        .show();
+            }
+        }
+
+        return super.onOptionsItemSelected(item);
     }
 }

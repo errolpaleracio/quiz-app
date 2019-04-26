@@ -13,7 +13,7 @@
         android:layout_height="wrap_content">
 
     <android.support.v7.widget.Toolbar
-        android:id="@+id/toolbar"
+        android:id="@+id/toolbar_question"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         app:popupTheme="@style/App.Theme.PopupOverlay"
@@ -21,7 +21,7 @@
 
     </android.support.v7.widget.Toolbar>
 
-</android.support.design.widget.AppBarLayout>
+    </android.support.design.widget.AppBarLayout>
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -65,12 +65,22 @@
 
         </LinearLayout>
         <TextView
-            android:id="@+id/tv_question_text"
-            android:textSize="16sp"
-            android:text="Question Text"
+            android:id="@+id/tv_directions"
+            android:textSize="14sp"
+            android:text="Direction: "
             android:background="@drawable/question_text_style"
             android:layout_below="@+id/lifePane"
             android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:padding="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:id="@+id/tv_question_text"
+            android:textSize="25sp"
+            android:text="Question Text"
+            android:background="@drawable/question_text_style"
+            android:layout_below="@+id/tv_directions"
             android:layout_marginBottom="10dp"
             android:padding="20dp"
             android:layout_width="match_parent"
@@ -115,16 +125,16 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
 
-            <RadioButton
-                android:id="@+id/rbAnswerD"
-                android:text="D: "
-                android:textColor="#fff"
-                android:background="@drawable/custom_radio_button"
-                android:button="@android:color/transparent"
-                android:padding="10dp"
-                android:layout_marginBottom="10dp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+            <!--<RadioButton-->
+                <!--android:id="@+id/rbAnswerD"-->
+                <!--android:text="D: "-->
+                <!--android:textColor="#fff"-->
+                <!--android:background="@drawable/custom_radio_button"-->
+                <!--android:button="@android:color/transparent"-->
+                <!--android:padding="10dp"-->
+                <!--android:layout_marginBottom="10dp"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content" />-->
 
         </RadioGroup>
     </RelativeLayout>

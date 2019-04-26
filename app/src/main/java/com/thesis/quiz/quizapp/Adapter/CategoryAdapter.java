@@ -9,12 +9,14 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.thesis.quiz.quizapp.Common.Common;
 import com.thesis.quiz.quizapp.MainActivity;
 import com.thesis.quiz.quizapp.Model.Category;
+import com.thesis.quiz.quizapp.PlaceValueActivity;
 import com.thesis.quiz.quizapp.QuestionActivity;
 import com.thesis.quiz.quizapp.R;
 
@@ -24,6 +26,7 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
 
     private List<Category> categories;
     private Context context;
+    private MediaPlayer mp;
 
     public CategoryAdapter(List<Category> categories, Context context) {
         this.categories = categories;
@@ -48,6 +51,8 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
 
     @Override
     public void onBindViewHolder(@NonNull CategoryViewHolder categoryViewHolder, int i) {
+        if(categories.get(i).getIsDone() == 0)
+            categoryViewHolder.layout.setBackgroundResource(R.drawable.card_view_disabled);
         categoryViewHolder.tvCategoryName.setText(categories.get(i).getCategoryText());
     }
 
@@ -59,21 +64,36 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.Catego
     public class CategoryViewHolder extends RecyclerView.ViewHolder{
         TextView tvCategoryName;
         CardView cardView;
+        RelativeLayout layout;
 
         public CategoryViewHolder(@NonNull View itemView) {
             super(itemView);
             tvCategoryName = (TextView)itemView.findViewById(R.id.tv_category_name);
             cardView = (CardView)itemView.findViewById(R.id.card_category);
+            layout = (RelativeLayout)itemView.findViewById(R.id.card_view_main);
             cardView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    final MediaPlayer mp = MediaPlayer.create(context, R.raw.tap);
-                    mp.start();
                     Common.selectedCategory = categories.get(getAdapterPosition());
+                    if(Common.selectedCategory.getIsDone() == 0) {
+                        return;
+                    }
+
+                    mp = MediaPlayer.create(context, R.raw.tap);
+                    mp.start();
+
                     Intent intent = new Intent(context, QuestionActivity.class);
                     context.startActivity(intent);
                 }
             });
         }
+
+
+    }
+
+    @Override
+    public void onDetachedFromRecyclerView(@NonNull RecyclerView recyclerView) {
+        mp.release();
+        super.onDetachedFromRecyclerView(recyclerView);
     }
 }

@@ -1,18 +1,18 @@
 package com.thesis.quiz.quizapp.Model;
 
 public class Question {
-    private int questionId, categoryId;
-    private String questionText, answerA, answerB, answerC, answerD, correctAnswer;
+    private int questionId, categoryId, underlineIndex;
+    private String questionText, answerA, answerB, answerC, correctAnswer;
 
-    public Question(int questionId, int categoryId, String questionText, String answerA, String answerB, String answerC, String answerD, String correctAnswer) {
+    public Question(int questionId, int categoryId, String questionText, String answerA, String answerB, String answerC, String correctAnswer, int underlineIndex) {
         this.questionId = questionId;
         this.categoryId = categoryId;
         this.questionText = questionText;
         this.answerA = answerA;
         this.answerB = answerB;
         this.answerC = answerC;
-        this.answerD = answerD;
         this.correctAnswer = correctAnswer;
+        this.underlineIndex = underlineIndex;
     }
 
     public int getQuestionId() {
@@ -63,19 +63,19 @@ public class Question {
         this.answerC = answerC;
     }
 
-    public String getAnswerD() {
-        return answerD;
-    }
-
-    public void setAnswerD(String answerD) {
-        this.answerD = answerD;
-    }
-
     public String getCorrectAnswer() {
         return correctAnswer;
     }
 
     public void setCorrectAnswer(String correctAnswer) {
         this.correctAnswer = correctAnswer;
+    }
+
+    public int getUnderlineIndex() {
+        return underlineIndex;
+    }
+
+    public void setUnderlineIndex(int underlineIndex) {
+        this.underlineIndex = underlineIndex;
     }
 }
