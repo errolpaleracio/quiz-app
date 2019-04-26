@@ -49,9 +49,10 @@ public class QuestionActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_question);
         Toolbar toolbar = (Toolbar)findViewById(R.id.toolbar_question);
-        toolbar.setTitle("Quiz");
+        toolbar.setTitle(Common.selectedCategory.getCategoryText());
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
 
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
