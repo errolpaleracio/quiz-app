@@ -125,16 +125,17 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
 
-            <!--<RadioButton-->
-                <!--android:id="@+id/rbAnswerD"-->
-                <!--android:text="D: "-->
-                <!--android:textColor="#fff"-->
-                <!--android:background="@drawable/custom_radio_button"-->
-                <!--android:button="@android:color/transparent"-->
-                <!--android:padding="10dp"-->
-                <!--android:layout_marginBottom="10dp"-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="wrap_content" />-->
+            <RadioButton
+                android:id="@+id/rbAnswerD"
+                android:visibility="invisible"
+                android:text="D: "
+                android:textColor="#fff"
+                android:background="@drawable/custom_radio_button"
+                android:button="@android:color/transparent"
+                android:padding="10dp"
+                android:layout_marginBottom="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
 
         </RadioGroup>
     </RelativeLayout>

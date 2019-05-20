@@ -70,8 +70,9 @@ public class DBHelper extends SQLiteAssetHelper{
                 String answerC = cursor.getString(4);
                 String correctAnswer = cursor.getString(5);
                 int underlineIndex = cursor.getInt(7);
+                String answerD = cursor.getString(8);
 
-                Question question = new Question(id, categoryId, questionText,  answerA, answerB, answerC, correctAnswer, underlineIndex);
+                Question question = new Question(id, categoryId, questionText,  answerA, answerB, answerC, correctAnswer, underlineIndex, answerD);
                 questions.add(question);
                 cursor.moveToNext();
             }

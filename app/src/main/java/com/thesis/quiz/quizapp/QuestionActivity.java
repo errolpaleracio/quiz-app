@@ -75,7 +75,7 @@ public class QuestionActivity extends AppCompatActivity {
         rbAnswerA = (RadioButton)findViewById(R.id.rbAnswerA);
         rbAnswerB = (RadioButton)findViewById(R.id.rbAnswerB);
         rbAnswerC = (RadioButton)findViewById(R.id.rbAnswerC);
-        //rbAnswerD = (RadioButton)findViewById(R.id.rbAnswerD);
+        rbAnswerD = (RadioButton)findViewById(R.id.rbAnswerD);
         initQuestion();
 //        btnNext = (Button)findViewById(R.id.btn_next);
 //        btnNext.setOnClickListener(new View.OnClickListener() {
@@ -110,6 +110,14 @@ public class QuestionActivity extends AppCompatActivity {
                 rbAnswerC.setVisibility(View.VISIBLE);
             }else
                 rbAnswerC.setVisibility(View.GONE);
+
+            if(Common.selectedCategory.getCategoryId() == 1){
+                rbAnswerD.setText(question.getAnswerD());
+                rbAnswerD.setVisibility(View.VISIBLE);
+            }
+            else{
+                rbAnswerD.setVisibility(View.GONE);
+            }
         }
     }
 
